@@ -1,0 +1,143 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.token.email));
+    }
+
+    match /admins/{email} {
+      allow get: if request.auth != null
+        && request.auth.token.email != null
+        && request.auth.token.email == email;
+      allow list: if isAdmin();
+      allow write: if false;
+    }
+
+    match /schools/{schoolId} {
+      allow read: if true;
+      allow write: if isAdmin();
+
+      match /departments/{deptId} {
+        allow read: if true;
+        allow write: if isAdmin();
+
+        match /levels/{levelId} {
+          allow read: if true;
+          allow write: if isAdmin();
+
+          match /courses/{courseId} {
+            allow read: if true;
+            allow write: if isAdmin();
+
+            match /chapters/{chapterId} {
+              allow read: if true;
+              allow write: if isAdmin();
+
+              match /topics/{topicId} {
+                allow read: if true;
+                allow write: if isAdmin();
+              }
+            }
+          }
+        }
+      }
+    }
+
+    match /courses/{courseId} {
+      allow read: if true;
+      allow write: if isAdmin();
+
+      match /topics/{topicId} {
+        allow read: if true;
+        allow create, delete: if isAdmin();
+        allow update: if request.auth != null;
+      }
+    }
+
+    match /{path=**}/departments/{deptId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /{path=**}/levels/{levelId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /{path=**}/courses/{courseId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /{path=**}/topics/{topicId} {
+      allow read: if true;
+      allow create, delete: if isAdmin();
+      allow update: if request.auth != null;
+    }
+
+    match /{path=**}/ocw_departments/{deptId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /{path=**}/ocw_levels/{levelId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /{path=**}/ocwCourses/{courseId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /{path=**}/ocwDepartments/{deptId} {
+      allow read: if true;
+    }
+    match /{path=**}/ocw_courses/{courseId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /{path=**}/ocw_topics/{topicId} {
+      allow read: if true;
+      allow create, delete: if isAdmin();
+      allow update: if request.auth != null;
+    }
+
+    match /{path=**}/categories/{docId} {
+      allow read: if true;
+    }
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+    match /{path=**}/curriculum/{docId} {
+      allow read: if true;
+    }
+    match /{path=**}/curriculums/{docId} {
+      allow read: if true;
+    }
+      
+    match /users/{userId} {
+      allow read: if isAdmin() || (request.auth != null && request.auth.uid == userId);
+      allow create, update: if request.auth != null && request.auth.uid == userId;
+      allow delete: if isAdmin();
+
+      match /recent_views/{viewId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    match /notes/{noteId} {
+      allow read: if request.auth != null && (resource == null || resource.data.userId == request.auth.uid);
+      allow write: if request.auth != null && (resource == null || resource.data.userId == request.auth.uid) && (request.resource == null || request.resource.data.userId == request.auth.uid);
+    }
+
+    match /chat_sessions/{sessionId} {
+      allow read: if request.auth != null && (resource == null || resource.data.userId == request.auth.uid);
+      allow write: if request.auth != null && (resource == null || resource.data.userId == request.auth.uid) && (request.resource == null || request.resource.data.userId == request.auth.uid);
+    }
+  }
+}
+

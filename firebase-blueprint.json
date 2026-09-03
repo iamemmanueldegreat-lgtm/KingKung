@@ -1,0 +1,108 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile document",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "full_name": { "type": "string" },
+        "state": { "type": "string" },
+        "school": { "type": "string" },
+        "department": { "type": "string" },
+        "level": { "type": "string" },
+        "is_pro": { "type": "boolean" },
+        "avatar_url": { "type": "string" },
+        "is_admin": { "type": "boolean" },
+        "id": { "type": "string" }
+      },
+      "required": ["email", "state", "school", "department", "level"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "Information about a course in a school",
+      "type": "object",
+      "properties": {
+        "school": { "type": "string" },
+        "department": { "type": "string" },
+        "level": { "type": "string" },
+        "code": { "type": "string" },
+        "title": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["school", "department", "level", "code", "title"]
+    },
+    "Topic": {
+      "title": "Topic",
+      "description": "Topic within a course",
+      "type": "object",
+      "properties": {
+        "course_id": { "type": "string" },
+        "title": { "type": "string" }
+      },
+      "required": ["course_id", "title"]
+    },
+    "Note": {
+      "title": "Note",
+      "description": "A student's personal note",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "color": { "type": "string" },
+        "tags": { 
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "isLocked": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "content", "createdAt", "updatedAt"]
+    },
+    "ChatSession": {
+      "title": "ChatSession",
+      "description": "A user's chat session",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "messages": { 
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "messages", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles"
+    },
+    "/users/{userId}/recent_views/{courseId}": {
+       "schema": { "type": "object", "properties": { "courseId": { "type": "string" }, "lastViewedAt": { "type": "string" } } },
+       "description": "User's recently viewed courses"
+    },
+    "/courses/{courseId}": {
+      "schema": { "$ref": "#/entities/Course" },
+      "description": "Courses"
+    },
+    "/courses/{courseId}/topics/{topicId}": {
+      "schema": { "$ref": "#/entities/Topic" },
+      "description": "Topics within a course"
+    },
+    "/notes/{noteId}": {
+      "schema": { "$ref": "#/entities/Note" },
+      "description": "User notes"
+    },
+    "/chat_sessions/{sessionId}": {
+      "schema": { "$ref": "#/entities/ChatSession" },
+      "description": "User chat sessions"
+    }
+  }
+}

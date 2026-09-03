@@ -1,0 +1,8 @@
+{
+  "name": "KortexAi",
+  "description": "An AI-powered learning platform for Nigerian students to master their courses with intelligent study assistance.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

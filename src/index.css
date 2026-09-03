@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-space: "Space Grotesk", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+
+  /* Base Semantic Palette */
+  --color-primary: #3B82F6;
+  --color-background: #FFFFFF;
+  --color-surface: #F8FAFC;
+  --color-text: #111827;
+  --color-muted: #6B7280;
+  --color-border: #E5E7EB;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-accent: #8B5CF6;
+
+  /* Dark mode specific variables if needed directly */
+  --color-dark-primary: #3B82F6;
+  --color-dark-background: #0B0F19;
+  --color-dark-surface: #111827;
+  --color-dark-text: #F9FAFB;
+  --color-dark-muted: #9CA3AF;
+  --color-dark-border: #1F2937;
+  --color-dark-success: #22C55E;
+  --color-dark-warning: #F59E0B;
+  --color-dark-accent: #3B82F6;
+
+  --radius-bento: 1.5rem;
+  --shadow-bento: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+@layer base {
+  :root {
+    --color-primary: #3B82F6;
+    --color-background: #FFFFFF;
+    --color-surface: #F8FAFC;
+    --color-text: #111827;
+    --color-muted: #6B7280;
+    --color-border: #E5E7EB;
+    --color-success: #22C55E;
+    --color-warning: #F59E0B;
+    --color-accent: #8B5CF6;
+  }
+
+  .dark {
+    --color-primary: #3B82F6;
+    --color-background: #0B0F19;
+    --color-surface: #111827;
+    --color-text: #F9FAFB;
+    --color-muted: #9CA3AF;
+    --color-border: #1F2937;
+    --color-success: #22C55E;
+    --color-warning: #F59E0B;
+    --color-accent: #8B5CF6;
+  }
+
+  body {
+    @apply bg-background text-text antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .card-bento {
+    @apply bg-surface border border-border rounded-[24px] shadow-sm p-6 transition-all hover:shadow-md;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-[16px] font-semibold hover:opacity-95 transition-all active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none shadow-lg shadow-primary/10;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-[16px] border border-border bg-surface focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none transition-all;
+  }
+
+  .bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 h-20 bg-surface/90 backdrop-blur-xl border-t border-border flex justify-around items-center px-4 pb-4 z-50;
+  }
+
+  .badge-blue {
+    @apply px-3 py-1 bg-primary/10 text-primary rounded-full text-[10px] font-bold uppercase tracking-widest;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-1.5 h-1.5;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Custom Table Styling for pristine, professional tables */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: table;
+}
+
+.prose th {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 16px !important;
+  border: 1px solid var(--color-border);
+}
+
+.prose td {
+  padding: 12px 16px !important;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.prose tbody tr:nth-child(even) {
+  background-color: rgba(120, 120, 120, 0.03);
+}
+
+.dark .prose th {
+  background-color: #111318;
+  border-color: var(--color-border);
+}
+
+.dark .prose td {
+  border-color: var(--color-border);
+}

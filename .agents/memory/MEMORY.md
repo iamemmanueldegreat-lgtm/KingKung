@@ -1,0 +1,4 @@
+- [Curriculum data model](curriculum-data-model.md) — NBTE courses use school:'NBTE', CCMAS use 'CCMAS'; Library filters include these shared sources alongside school-specific ones
+- [DeepSeek client setup](deepseek-client.md) — all AI uses getDeepSeekClient() + model constant DEEPSEEK_MODEL='deepseek-chat'; no Gemini or Anthropic anywhere
+- [NBTE level handling](nbte-level-handling.md) — NBTE imports must distinguish ND1/ND2 from HND1/HND2 when documents use Year I/II headings
+- [Replit preview ports](replit-preview-ports.md) — embedded Vite previews need HMR and websocket listeners disabled so only the app port is exposed

@@ -1,0 +1,9 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "5L1SmA01QW4hYz_ddEHUP"
+uri = "file://KORTEX_AI_HANDOFF.md"
+type = "text"
+title = "Kortex AI Handoff Document"
+description = "Complete product, architecture, Firebase, DeepSeek, NBTE curriculum, Replit, and continuation guide for another AI vibecoder."

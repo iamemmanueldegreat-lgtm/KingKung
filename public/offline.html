@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kortex AI - Offline</title>
+  <link rel="icon" type="image/png" href="/logo.png">
+  <style>
+    :root {
+      --bg-dark: #09090C;
+      --card-dark: #121218;
+      --text-main: #F4F4F5;
+      --text-muted: #A1A1AA;
+      --accent-purple: #7C3AED;
+      --accent-purple-glow: rgba(124, 58, 237, 0.4);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      max-width: 440px;
+      width: 100%;
+      background-color: var(--card-dark);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 28px;
+      padding: 40px 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: 10%;
+      width: 80%;
+      height: 40%;
+      background: radial-gradient(circle, var(--accent-purple-glow) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .logo-container {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 24px;
+    }
+
+    .logo {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 0.85;
+      }
+    }
+
+    .wifi-icon {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      background-color: var(--accent-purple);
+      border: 3px solid var(--card-dark);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    .wifi-icon svg {
+      width: 14px;
+      height: 14px;
+      fill: #fff;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      z-index: 2;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      z-index: 2;
+    }
+
+    .btn-reconnect {
+      background-color: var(--accent-purple);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px var(--accent-purple-glow);
+      transition: all 0.3s ease;
+      width: 100%;
+      z-index: 2;
+    }
+
+    .btn-reconnect:hover {
+      background-color: #6D28D9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
+    }
+
+    .btn-reconnect:active {
+      transform: translateY(0);
+    }
+
+    .footer {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: rgba(255, 255, 255, 0.2);
+      text-transform: uppercase;
+      margin-top: 24px;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <img src="/logo.png" alt="Kortex AI Logo" class="logo">
+      <div class="wifi-icon">
+        <svg viewBox="0 0 24 24">
+          <!-- Offline Wifi icon (slashed wifi or offline representation) -->
+          <path d="M23 12l-2.1-2.1-2.9 2.9 2.9 2.9L23 12zm-6.1-2.1l-2.9 2.9 2.9 2.9 2.1-2.1-2.1-3.7zM3 12l2.1 2.1 2.9-2.9-2.9-2.9L3 12zm6.1 2.1l2.9-2.9-2.9-2.9-2.1 2.1 2.1 3.7zM12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61l1.42-1.42C5.54 15.02 5 13.57 5 12c0-3.87 3.13-7 7-7s7 3.13 7 7c0 1.57-.54 3.02-1.39 4.19l1.42 1.42C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9zm0 4c-2.76 0-5 2.24-5 5 0 1.15.39 2.21 1.05 3.05l1.42-1.42C9.17 13.12 9 12.58 9 12c0-1.66 1.34-3 3-3s3 1.34 3 3c0 .58-.17 1.12-.47 1.63l1.42 1.42c.66-.84 1.05-1.9 1.05-3.05 0-2.76-2.24-5-5-5zm0 10a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+          <path d="M2 2l20 20" stroke="#fff" stroke-width="2.5" stroke-linecap="round" />
+        </svg>
+      </div>
+    </div>
+    <h1>You are currently offline</h1>
+    <p>Please check your internet connection. Kortex AI will automatically reconnect as soon as a network is available.</p>
+    <button class="btn-reconnect" onclick="window.location.reload(true)">Try Reconnecting</button>
+    <div class="footer">Kortex AI Offline Companion</div>
+  </div>
+</body>
+</html>
